@@ -1,0 +1,130 @@
+.page{
+	position: relative;
+	bottom:1%;
+	left: 1%;
+	right: 1%;
+	top: 1%;
+	width: 98%;
+	height:98%;
+	background-color : #000000;
+	border: solid 1px #FF0000;
+	
+}
+.header {
+	position: relative;
+	left: 0;
+	right: 0;
+	width: 100%;
+	background-color: red;
+	color: white;
+	text-align: center;
+	border: solid 1px #00FF00;
+}
+.nav { 
+	position: relative;
+	left: 0;
+	right: 0;
+	width: 100%;
+	background-color : #00FF00;
+	border: solid 1px #00FF00;
+}
+
+.center {
+	position: relative;
+	right:0;
+	left:0;
+	width:100%;
+	background-color: blue;
+	border: solid 1px #0000FF;
+	overflow: scroll;
+}
+
+.content {
+	position: relative;
+	left: 0;
+	right: 0;
+	width: 100%;
+	color: #ff0000;
+	background-color : red;
+	border: solid 1px #00FF00;
+	overflow: scroll;
+	
+	
+}
+.bandeau{
+	position: relative;
+	left: 0;
+	right: 0;
+	width: 100%;
+	color:#000000;
+	background-color : #B0BEC5;
+	border: solid 1px #FF0000;
+}
+.bon_cuisine {
+	position: relative;
+	float:left;
+	color:#000000;
+	background-color: #ffffff;
+	border: solid 1px #FF0000;
+}
+.admin_tables {
+	position: relative;
+	float:left;
+	color:#000000;
+	background-color: #ffffff;
+	border: solid 1px #FF0000;
+}
+
+.admin_boissons {
+	position: relative;
+	float:left;
+	color:#000000;
+	background-color: #ffffff;
+	border: solid 1px #FF0000;
+}
+
+.admin_plat_carte{
+	position: relative;
+	float:left;
+	color:#000000;
+	background-color: #ffffff;
+	border: solid 1px #FF0000;
+}
+
+.admin_produits {
+	position: relative;
+	float:left;
+	color:#000000;
+	background-color: #ffffff;
+	border: solid 1px #FF0000;
+}
+
+.form_conn {
+	position: relative;
+	float:left;
+	color:#000000;
+	background-color: #ffffff;
+	border: solid 1px #FF0000;
+}
+.footer {
+	position: relative;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: red;
+	color: white;
+	text-align: center;
+	border: solid 1px #00FF00;
+}
+.footer2 {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: red;
+	color: white;
+	text-align: center;
+	border: solid 1px #00FF00;
+}
