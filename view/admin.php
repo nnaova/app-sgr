@@ -17,7 +17,7 @@ if ($_SESSION["role"] == "admin") {
 							<th>action</th>
 						</tr>
 						<?php
-						foreach ($tables as $table) {
+						foreach ($tables as $table) { 
 
 						?>
 							<tr>
@@ -75,7 +75,52 @@ if ($_SESSION["role"] == "admin") {
 				</div>
 				<div class="card-body">
 
-					ici la liste des produits allergènes
+					<table class="produit">
+						<tr>
+							<th>nom du produit</th>
+							<th>action</th>
+						</tr>
+						<?php
+						foreach ($produits as $produits) { 
+
+						?>
+							<tr>
+								<td><?php echo $produits['nom_prduit']; ?></td>
+								<td>
+									<table>
+										<tr>
+											<td>
+												<form method=POST action="#">
+													<input type="hidden" value="suppr produit" name="action">
+													<input type="hidden" name="id_produit" value="<?php echo $produits["id_produit"]; ?>">
+													<button type="submit"><i data-feather="trash-2"></i></button>
+												</form>
+											</td>
+											<td>
+												<form method=POST action="#">
+													<input type="hidden" value="modif produit" name="action">
+													<input type="hidden" name="id_produit" value="<?php echo $produits["id_produit"]; ?>">
+													<button type="submit"><i data-feather="trash-2"></i></button>
+												</form>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						<?php
+						}
+						?>
+						<tr>
+							<form method="POST" action="#">
+								<input type="hidden" value="ajouter produit" name="action">
+								<td>
+									<input type="text" name="nom_produit" size="11">
+								</td>
+								<td>
+									<button type="submit"><i data-feather="plus-square"></i></button>
+							</form>
+						</td>
+					</table>
 				</div>
 			</div>
 		</div>
@@ -87,8 +132,69 @@ if ($_SESSION["role"] == "admin") {
 					<h5 class="card-title mb-0">Boissons</h5>
 				</div>
 				<div class="card-body">
+				<?php
+						foreach ($boissons as $boisson) { 
 
-					ici la liste des boisson et pour chaque boisson les produits "allergène" qu'elle contient
+						?>
+							<tr>
+								<td><?php echo $boisson['nom_boisson']; ?></td>
+								<td><?php echo $boisson['description']; ?></td>
+								<td><?php echo $contenir_boisson_produit['id_produit']; ?></td>
+								<td><?php echo $boisson['PU']; ?></td>
+								
+								<td>
+									<table>
+										<tr>
+											<td>
+												<form method=POST action="#">
+													<input type="hidden" value="suppr boisson" name="action">
+													<input type="hidden" name="id_boisson" value="<?php echo $boisson["id_boisson"]; ?>">
+													<button type="submit"><i data-feather="trash-2"></i></button>
+												</form>
+											</td>
+											<td>
+												<form method=POST action="#">
+													<input type="hidden" value="ajout boisson" name="action">
+													<input type="hidden" name="id_boisson" value="<?php echo $boisson["id_boisson"]; ?>">
+													<button type="submit"><i data-feather="edit"></i></button>
+												</form>
+											</td>
+											<td>
+												<form method=POST action="#">
+													<input type="hidden" value="modif boisson" name="action">
+													<input type="hidden" name="id_boisson" value="<?php echo $boisson["id_boisson"]; ?>">
+													<button type="submit"><i data-feather="edit"></i></button>
+												</form>
+											</td>
+											<td>
+												<form method=POST action="#">
+													<input type="hidden" value="ajout prod boisson" name="action">
+													<input type="hidden" name="id_boisson" value="<?php echo $produits["id_produit"]; ?>">
+													<button type="submit"><i data-feather="edit"></i></button>
+												</form>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						<?php
+						}
+						?>
+						<tr>
+							<form method="POST" action="#">
+								<input type="hidden" value="ajouter boisson" name="action">
+								<td>
+									<input type="text" name="nom_boisson" size="11">
+								</td>
+								<td>
+									<button type="submit"><i data-feather="plus-square"></i></button>
+							</form>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
 
 				</div>
 			</div>
