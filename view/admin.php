@@ -186,6 +186,11 @@ if ($_SESSION["role"] == "admin") {
 								<td>
 									<input type="text" name="PU" size="11">
 								</td>
+								<td>
+									<SELECT name="type" size="1">
+										<option value="RON"><?php echo $produit['nom_produit']; ?></option>
+									</SELECT>
+								</td>
 									<button type="submit"><i data-feather="plus-square"></i></button>
 							</form>
 							</td>
