@@ -112,7 +112,7 @@ if ($_SESSION["role"] == "admin") {
 						?>
 						<tr>
 							<form method="POST" action="#">
-								<input type="hidden" value="ajouter produit" name="action">
+								<input type="hidden" value="ajout produit" name="action">
 								<td>
 									<input type="text" name="nom_produit" size="11">
 								</td>
@@ -129,12 +129,12 @@ if ($_SESSION["role"] == "admin") {
 		<div class="col-12 col-xl-6 col-xxl-6 col-md-6 d-flex order-1 order-xxl-1">
 			<div class="card">
 				<div class="card-header">
-					<h5 class="card-title mb-0">Boissons</h5>
+					<h5 class="card-title mb-0">Boissons de bg</h5>
 				</div>
 				<div class="card-body">
 				<table class="table">
 						<tr>
-							<th>nom de la boisson</th>
+							<th>Nom</th>
 							<th>description</th>
 							<th>prix</th>
 							<th>action</th>
@@ -161,7 +161,7 @@ if ($_SESSION["role"] == "admin") {
 											</td>
 											<td>
 												<form method=POST action="#">
-													<input type="hidden" value="ajout boisson" name="action">
+													<input type="hidden" value="modif boisson" name="action">
 													<input type="hidden" name="id_boisson" value="<?php echo $boisson["id"]; ?>">
 													<button type="submit"><i data-feather="edit"></i></button>
 												</form>
@@ -175,11 +175,16 @@ if ($_SESSION["role"] == "admin") {
 						?>
 						<tr>
 							<form method="POST" action="#">
-								<input type="hidden" value="ajouter boisson" name="action">
+								<input type="hidden" value="ajout boisson" name="action">
 								<td>
 									<input type="text" name="nom_boisson" size="11">
 								</td>
 								<td>
+									<input type="text" name="description" size="11">
+								</td>
+								<td>
+									<input type="text" name="prix" size="11">
+								</td>
 									<button type="submit"><i data-feather="plus-square"></i></button>
 							</form>
 							</td>
@@ -224,5 +229,7 @@ if ($_SESSION["role"] == "admin") {
 <?php
 } else {
 	echo ("vous n'avez pas le droit d'être là");
+   
+
 }
 ?>

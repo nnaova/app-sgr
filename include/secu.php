@@ -34,6 +34,9 @@ if (isset($_SESSION["role"])) {
 								$nom_p = $_POST["nom_produit"];
 								$statmt = $pdo->prepare('INSERT INTO `produit` (`id_produit`, `nom_produit`) VALUES (null,"' . $nom_p . '")');
 								$statmt->execute();
+								$statmt = $pdo->prepare('INSERT INTO `contenir_plat_produit` (`id_produit`, `nom_produit`) VALUES (null,"' . $nom_p . '")');
+								$statmt->execute();
+								$statmt = $pdo->prepare('INSERT INTO `contenir_boisson_produit` (`id_produit`, `nom_produit`) VALUES (null,"' . $nom_p . '")');
 								break;
 							}
 						case "suppr produit": {
@@ -67,6 +70,7 @@ if (isset($_SESSION["role"])) {
 							}
 						case "modif boison": {
 								$id_b = $_POST["id_boisson"];
+								
 								break;
 							}
 						case "ajout prod boisson": {
