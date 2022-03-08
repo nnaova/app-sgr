@@ -175,6 +175,7 @@ if ($_SESSION["role"] == "admin") {
 						?>
 						<tr>
 							<form method="POST" action="#">
+							<td>
 								<input type="hidden" value="ajout boisson" name="action">
 								<td>
 									<input type="text" name="nom_boisson" size="11">
@@ -183,7 +184,7 @@ if ($_SESSION["role"] == "admin") {
 									<input type="text" name="description" size="11">
 								</td>
 								<td>
-									<input type="text" name="prix" size="11">
+									<input type="text" name="PU" size="11">
 								</td>
 									<button type="submit"><i data-feather="plus-square"></i></button>
 							</form>

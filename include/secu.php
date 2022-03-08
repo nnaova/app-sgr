@@ -68,11 +68,12 @@ if (isset($_SESSION["role"])) {
 								$statmt->execute();
 								break;
 							}
-						case "modif boison": {
-								$id_b = $_POST["id_boisson"];
-								
-								break;
-							}
+						// case "modif boisson": {
+						// 		$id_b = $_POST["id_boisson"];
+						// 		$em = prompt("Entrer la modification")
+						// 		$statmt = 
+						// 		break;
+							// }
 						case "ajout prod boisson": {
 								$id_p = $_POST["id_produit"];
 								$id_b = $_POST["id_boisson"];
