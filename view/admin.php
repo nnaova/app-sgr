@@ -75,32 +75,32 @@ if ($_SESSION["role"] == "admin") {
 				</div>
 				<div class="card-body">
 
-					<table class="produit">
+					<table class="table">
 						<tr>
 							<th>nom du produit</th>
 							<th>action</th>
 						</tr>
 						<?php
-						foreach ($produits as $produits) { 
+						foreach ($produits as $produit) { 
 
 						?>
 							<tr>
-								<td><?php echo $produits['nom_prduit']; ?></td>
+								<td><?php echo $produit['nom_produit']; ?></td>
 								<td>
 									<table>
 										<tr>
 											<td>
 												<form method=POST action="#">
 													<input type="hidden" value="suppr produit" name="action">
-													<input type="hidden" name="id_produit" value="<?php echo $produits["id_produit"]; ?>">
+													<input type="hidden" name="id_produit" value="<?php echo $produit["id_produit"]; ?>">
 													<button type="submit"><i data-feather="trash-2"></i></button>
 												</form>
 											</td>
 											<td>
 												<form method=POST action="#">
 													<input type="hidden" value="modif produit" name="action">
-													<input type="hidden" name="id_produit" value="<?php echo $produits["id_produit"]; ?>">
-													<button type="submit"><i data-feather="trash-2"></i></button>
+													<input type="hidden" name="id_produit" value="<?php echo $produit["id_produit"]; ?>">
+													<button type="submit"><i data-feather="edit"></i></button>
 												</form>
 											</td>
 										</tr>
@@ -156,20 +156,6 @@ if ($_SESSION["role"] == "admin") {
 												<form method=POST action="#">
 													<input type="hidden" value="ajout boisson" name="action">
 													<input type="hidden" name="id_boisson" value="<?php echo $boisson["id_boisson"]; ?>">
-													<button type="submit"><i data-feather="edit"></i></button>
-												</form>
-											</td>
-											<td>
-												<form method=POST action="#">
-													<input type="hidden" value="modif boisson" name="action">
-													<input type="hidden" name="id_boisson" value="<?php echo $boisson["id_boisson"]; ?>">
-													<button type="submit"><i data-feather="edit"></i></button>
-												</form>
-											</td>
-											<td>
-												<form method=POST action="#">
-													<input type="hidden" value="ajout prod boisson" name="action">
-													<input type="hidden" name="id_boisson" value="<?php echo $produits["id_produit"]; ?>">
 													<button type="submit"><i data-feather="edit"></i></button>
 												</form>
 											</td>

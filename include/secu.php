@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION["role"])) {
-	$pdo = new PDO("mysql:host=localhost;dbname=SGR_mono", "root", "");
+	$pdo = new PDO("mysql:host=127.0.0.1;dbname=sgr_mono", "root", "");
 	switch ($_SESSION["role"]) {
 		case "admin": {
 
@@ -456,7 +456,7 @@ if (isset($_SESSION["role"])) {
 		//on viens de la page de login
 		//on interroge la base et on renseigne les infos utiles au profile
 
-		$pdo = new PDO("mysql:host=localhost;dbname=SGR_mono", "root", "");
+		$pdo = new PDO("mysql:host=127.0.0.1;dbname=sgr_mono", "root", "");
 
 
 		$statmt = $pdo->prepare("SELECT * FROM user where login=:log AND mdp=:mdp");
