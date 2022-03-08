@@ -132,14 +132,21 @@ if ($_SESSION["role"] == "admin") {
 					<h5 class="card-title mb-0">Boissons</h5>
 				</div>
 				<div class="card-body">
-				<?php
+				<table class="table">
+						<tr>
+							<th>nom de la boisson</th>
+							<th>description</th>
+							<th>prix</th>
+							<th>action</th>
+							
+						</tr>
+						<?php
 						foreach ($boissons as $boisson) { 
 
 						?>
 							<tr>
 								<td><?php echo $boisson['nom_boisson']; ?></td>
 								<td><?php echo $boisson['description']; ?></td>
-								<td><?php echo $contenir_boisson_produit['id_produit']; ?></td>
 								<td><?php echo $boisson['PU']; ?></td>
 								
 								<td>
@@ -148,14 +155,14 @@ if ($_SESSION["role"] == "admin") {
 											<td>
 												<form method=POST action="#">
 													<input type="hidden" value="suppr boisson" name="action">
-													<input type="hidden" name="id_boisson" value="<?php echo $boisson["id_boisson"]; ?>">
+													<input type="hidden" name="id_boisson" value="<?php echo $boisson["id"]; ?>">
 													<button type="submit"><i data-feather="trash-2"></i></button>
 												</form>
 											</td>
 											<td>
 												<form method=POST action="#">
 													<input type="hidden" value="ajout boisson" name="action">
-													<input type="hidden" name="id_boisson" value="<?php echo $boisson["id_boisson"]; ?>">
+													<input type="hidden" name="id_boisson" value="<?php echo $boisson["id"]; ?>">
 													<button type="submit"><i data-feather="edit"></i></button>
 												</form>
 											</td>

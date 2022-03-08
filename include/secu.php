@@ -38,6 +38,8 @@ if (isset($_SESSION["role"])) {
 							}
 						case "suppr produit": {
 								$id_p = $_POST["id_produit"];
+								$statmt = $pdo->prepare('delete from contenir_plat_produit where `id_produit`=' . $id_p . ';');
+								$statmt->execute();
 								$statmt = $pdo->prepare('delete from produit where `id_produit`=' . $id_p . ';');
 								$statmt->execute();
 								break;
@@ -48,16 +50,17 @@ if (isset($_SESSION["role"])) {
 							}
 						case "ajout boisson": {
 								$nom_b = $_POST["nom_boisson"];
-								$desc = $_POST["desc"];
+								$desc = $_POST["description"];
 								$pu = $_POST["PU"];
 								$statmt = $pdo->prepare('INSERT INTO `boisson` (`id`, `nom_boisson`,`description`,`PU` ) VALUES (null,"' . $nom_b . '","' . $desc . '",' . $pu . ')');
 								$statmt->execute();
-
 								break;
 							}
 						case "suppr boisson": {
 								$id_b = $_POST["id_boisson"];
 								//echo 'delete from `boisson` where `id`='.$id_b.';';
+								$statmt = $pdo->prepare('delete from `contenir_boisson_produit` where `id_boisson` =' . $id_b .';');
+								$statmt->execute();
 								$statmt = $pdo->prepare('delete from `boisson` where `id`=' . $id_b . ';');
 								$statmt->execute();
 								break;
