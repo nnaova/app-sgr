@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION["role"])) {
-	$pdo = new PDO("mysql:host=127.0.0.1;dbname=SGR_MONO", "root", "");
+	$pdo = new PDO("mysql:host=localhost;dbname=SGR-MONO", "root", "");
 	switch ($_SESSION["role"]) {
 		case "admin": {
 
@@ -30,19 +30,14 @@ if (isset($_SESSION["role"])) {
 								$id_t = $_POST["id_table"];
 								break;
 							}
-						case "ajout produit": {
+						case "ajouter produit": {
 								$nom_p = $_POST["nom_produit"];
 								$statmt = $pdo->prepare('INSERT INTO `produit` (`id_produit`, `nom_produit`) VALUES (null,"' . $nom_p . '")');
 								$statmt->execute();
-								$statmt = $pdo->prepare('INSERT INTO `contenir_plat_produit` (`id_produit`, `nom_produit`) VALUES (null,"' . $nom_p . '")');
-								$statmt->execute();
-								$statmt = $pdo->prepare('INSERT INTO `contenir_boisson_produit` (`id_produit`, `nom_produit`) VALUES (null,"' . $nom_p . '")');
 								break;
 							}
 						case "suppr produit": {
 								$id_p = $_POST["id_produit"];
-								$statmt = $pdo->prepare('delete from contenir_plat_produit where `id_produit`=' . $id_p . ';');
-								$statmt->execute();
 								$statmt = $pdo->prepare('delete from produit where `id_produit`=' . $id_p . ';');
 								$statmt->execute();
 								break;
@@ -51,29 +46,27 @@ if (isset($_SESSION["role"])) {
 								$id_p = $_POST["id_produit"];
 								break;
 							}
-						case "ajout boisson": {
+						case "ajouter boisson": {
 								$nom_b = $_POST["nom_boisson"];
-								$desc = $_POST["description"];
+								$desc = $_POST["desc"];
 								$pu = $_POST["PU"];
 								$statmt = $pdo->prepare('INSERT INTO `boisson` (`id`, `nom_boisson`,`description`,`PU` ) VALUES (null,"' . $nom_b . '","' . $desc . '",' . $pu . ')');
 								$statmt->execute();
+
 								break;
 							}
 						case "suppr boisson": {
 								$id_b = $_POST["id_boisson"];
 								//echo 'delete from `boisson` where `id`='.$id_b.';';
-								$statmt = $pdo->prepare('delete from `contenir_boisson_produit` where `id_boisson` =' . $id_b .';');
-								$statmt->execute();
 								$statmt = $pdo->prepare('delete from `boisson` where `id`=' . $id_b . ';');
 								$statmt->execute();
 								break;
 							}
-						case "modif boisson": {
-						 		$id_b = $_POST["id_boisson"];
-						 		
-						 		break;
+						case "modif boison": {
+								$id_b = $_POST["id_boisson"];
+								break;
 							}
-						case "ajout prod boisson": {
+						case "ajouter prod boisson": {
 								$id_p = $_POST["id_produit"];
 								$id_b = $_POST["id_boisson"];
 								//echo 'insert into contenir_boisson_produit (`id_produit`,`id_boisson`) values ('.$id_p.','.$id_b.');';
@@ -89,7 +82,7 @@ if (isset($_SESSION["role"])) {
 								$statmt->execute();
 								break;
 							}
-						case "ajout plat": {
+						case "ajouter plat": {
 								$np = $_POST["nom_plat"];
 								$desc = $_POST["desc"];
 								$puc = $_POST["pu_carte"];
@@ -106,9 +99,9 @@ if (isset($_SESSION["role"])) {
 								$statmt->execute();
 								break;
 							}
-						case "ajout menu": {
+						case "ajouter menu": {
 								$nm = $_POST["nom_menu"];
-								$dm = $_POST["desc"];
+								$dm = $_POST["description"];
 								$Pm = $_POST["PU"];
 								$statmt = $pdo->prepare("INSERT INTO `menu` (`id_menu`, `nom_menu`, `PU`, `description`, `date_menu`) VALUES (NULL, '" . $nm . "', '" . $Pm . "', '" . $dm . "', NULL);");
 								$statmt->execute();
@@ -116,6 +109,8 @@ if (isset($_SESSION["role"])) {
 							}
 						case "suppr menu": {
 								$idm = $_POST["id_menu"];
+								$statmt = $pdo->prepare('delete from contenir_menu_plat where `id_menu`=' . $idm . ';');
+								$statmt->execute();
 								$statmt = $pdo->prepare('delete from menu where `id_menu`=' . $idm . ';');
 								$statmt->execute();
 								break;
@@ -463,7 +458,7 @@ if (isset($_SESSION["role"])) {
 		//on viens de la page de login
 		//on interroge la base et on renseigne les infos utiles au profile
 
-		$pdo = new PDO("mysql:host=127.0.0.1;dbname=SGR_MONO", "root", "");
+		$pdo = new PDO("mysql:host=localhost;dbname=SGR-MONO", "root", "");
 
 
 		$statmt = $pdo->prepare("SELECT * FROM user where login=:log AND mdp=:mdp");

@@ -23,7 +23,7 @@
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 		        <a class="navbar-brand" href="index.html">
-                     <span class="align-middle">SGR MONO</span>
+                     <span class="align-middle">Restaurant</span>
                 </a>
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
@@ -36,7 +36,7 @@ if(isset($_SESSION["role"])){
                             </a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                                <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark"><?php echo($_SESSION["login"]);?></span>
+                                <img src="img/avatars/avatar-6.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark"><?php echo($_SESSION["login"]);?></span>
                             </a>
 
 							<div class="dropdown-menu dropdown-menu-end">
