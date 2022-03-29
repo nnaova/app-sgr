@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION["role"])) {
-	$pdo = new PDO("mysql:host=127.0.0.1;dbname=SGR_MONO", "root", "");
+	$pdo = new PDO("mysql:host=localhost;dbname=SGR-MONO", "root", "");
 	switch ($_SESSION["role"]) {
 		case "admin": {
 
@@ -34,15 +34,10 @@ if (isset($_SESSION["role"])) {
 								$nom_p = $_POST["nom_produit"];
 								$statmt = $pdo->prepare('INSERT INTO `produit` (`id_produit`, `nom_produit`) VALUES (null,"' . $nom_p . '")');
 								$statmt->execute();
-								$statmt = $pdo->prepare('INSERT INTO `contenir_plat_produit` (`id_produit`, `nom_produit`) VALUES (null,"' . $nom_p . '")');
-								$statmt->execute();
-								$statmt = $pdo->prepare('INSERT INTO `contenir_boisson_produit` (`id_produit`, `nom_produit`) VALUES (null,"' . $nom_p . '")');
 								break;
 							}
 						case "suppr produit": {
 								$id_p = $_POST["id_produit"];
-								$statmt = $pdo->prepare('delete from contenir_plat_produit where `id_produit`=' . $id_p . ';');
-								$statmt->execute();
 								$statmt = $pdo->prepare('delete from produit where `id_produit`=' . $id_p . ';');
 								$statmt->execute();
 								break;
@@ -53,25 +48,23 @@ if (isset($_SESSION["role"])) {
 							}
 						case "ajout boisson": {
 								$nom_b = $_POST["nom_boisson"];
-								$desc = $_POST["description"];
+								$desc = $_POST["desc"];
 								$pu = $_POST["PU"];
 								$statmt = $pdo->prepare('INSERT INTO `boisson` (`id`, `nom_boisson`,`description`,`PU` ) VALUES (null,"' . $nom_b . '","' . $desc . '",' . $pu . ')');
 								$statmt->execute();
+
 								break;
 							}
 						case "suppr boisson": {
 								$id_b = $_POST["id_boisson"];
 								//echo 'delete from `boisson` where `id`='.$id_b.';';
-								$statmt = $pdo->prepare('delete from `contenir_boisson_produit` where `id_boisson` =' . $id_b .';');
-								$statmt->execute();
 								$statmt = $pdo->prepare('delete from `boisson` where `id`=' . $id_b . ';');
 								$statmt->execute();
 								break;
 							}
-						case "modif boisson": {
-						 		$id_b = $_POST["id_boisson"];
-						 		
-						 		break;
+						case "modif boison": {
+								$id_b = $_POST["id_boisson"];
+								break;
 							}
 						case "ajout prod boisson": {
 								$id_p = $_POST["id_produit"];
@@ -120,6 +113,20 @@ if (isset($_SESSION["role"])) {
 								$statmt->execute();
 								break;
 							}
+						case "suppr user": {
+								$idm = $_POST["id_user"];
+								$statmt = $pdo->prepare('delete from user where `id_user`=' . $idm . ';');
+								$statmt->execute();
+								break;
+							}
+						case "ajout user": {
+								$lg = $_POST["login"];
+								$rl = $_POST["role"];
+								$mdp = $_POST["mdp"];
+								$statmt = $pdo->prepare("INSERT INTO `user` (`id_user`, `login`,`role`, `mdp`) VALUES ('', '" . $lg . "', '" . $rl . "', '" . $mdp . "');");
+								$statmt->execute();
+								break;
+							}
 						default: {
 								echo "erreur d'action: " . $_POST["action"];
 							}
@@ -160,6 +167,10 @@ if (isset($_SESSION["role"])) {
 				$statmt8 = $pdo->prepare('SELECT M.id_menu AS id_menu, M.nom_menu AS nom_menu,P.nom_plat AS nom_plat,P.type_plat AS type_plat FROM contenir_menu_plat CMP, menu M, plat P WHERE CMP.id_plat=P.id_plat AND M.id_menu=CMP.id_menu ORDER BY id_menu');
 				$statmt8->execute();
 				$menuplats = $statmt8->fetchAll(PDO::FETCH_ASSOC);
+				//recup de la liste des utilisateurs
+				$statmt8 = $pdo->prepare('SELECT * FROM user');
+				$statmt8->execute();
+				$users = $statmt8->fetchAll(PDO::FETCH_ASSOC);
 
 				include("view/admin.php");
 				include("include/enpied2.php");
@@ -463,7 +474,7 @@ if (isset($_SESSION["role"])) {
 		//on viens de la page de login
 		//on interroge la base et on renseigne les infos utiles au profile
 
-		$pdo = new PDO("mysql:host=127.0.0.1;dbname=SGR_MONO", "root", "");
+		$pdo = new PDO("mysql:host=localhost;dbname=SGR-MONO", "root", "");
 
 
 		$statmt = $pdo->prepare("SELECT * FROM user where login=:log AND mdp=:mdp");
