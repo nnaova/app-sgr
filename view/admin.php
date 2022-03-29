@@ -17,7 +17,7 @@ if ($_SESSION["role"] == "admin") {
 							<th>action</th>
 						</tr>
 						<?php
-						foreach ($tables as $table) { 
+						foreach ($tables as $table) {
 
 						?>
 							<tr>
@@ -75,52 +75,7 @@ if ($_SESSION["role"] == "admin") {
 				</div>
 				<div class="card-body">
 
-					<table class="table">
-						<tr>
-							<th>nom du produit</th>
-							<th>action</th>
-						</tr>
-						<?php
-						foreach ($produits as $produit) { 
-
-						?>
-							<tr>
-								<td><?php echo $produit['nom_produit']; ?></td>
-								<td>
-									<table>
-										<tr>
-											<td>
-												<form method=POST action="#">
-													<input type="hidden" value="suppr produit" name="action">
-													<input type="hidden" name="id_produit" value="<?php echo $produit["id_produit"]; ?>">
-													<button type="submit"><i data-feather="trash-2"></i></button>
-												</form>
-											</td>
-											<td>
-												<form method=POST action="#">
-													<input type="hidden" value="modif produit" name="action">
-													<input type="hidden" name="id_produit" value="<?php echo $produit["id_produit"]; ?>">
-													<button type="submit"><i data-feather="edit"></i></button>
-												</form>
-											</td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-						<?php
-						}
-						?>
-						<tr>
-							<form method="POST" action="#">
-								<input type="hidden" value="ajout produit" name="action">
-								<td>
-									<input type="text" name="nom_produit" size="11">
-								</td>
-								<td>
-									<button type="submit"><i data-feather="plus-square"></i></button>
-							</form>
-						</td>
-					</table>
+					ici la liste des produits allergènes
 				</div>
 			</div>
 		</div>
@@ -129,76 +84,11 @@ if ($_SESSION["role"] == "admin") {
 		<div class="col-12 col-xl-6 col-xxl-6 col-md-6 d-flex order-1 order-xxl-1">
 			<div class="card">
 				<div class="card-header">
-					<h5 class="card-title mb-0">Boissons de bg</h5>
+					<h5 class="card-title mb-0">Boissons</h5>
 				</div>
 				<div class="card-body">
-				<table class="table">
-						<tr>
-							<th>Nom</th>
-							<th>description</th>
-							<th>prix</th>
-							<th>action</th>
-							
-						</tr>
-						<?php
-						foreach ($boissons as $boisson) { 
 
-						?>
-							<tr>
-								<td><?php echo $boisson['nom_boisson']; ?></td>
-								<td><?php echo $boisson['description']; ?></td>
-								<td><?php echo $boisson['PU']; ?></td>
-								
-								<td>
-									<table>
-										<tr>
-											<td>
-												<form method=POST action="#">
-													<input type="hidden" value="suppr boisson" name="action">
-													<input type="hidden" name="id_boisson" value="<?php echo $boisson["id"]; ?>">
-													<button type="submit"><i data-feather="trash-2"></i></button>
-												</form>
-											</td>
-											<td>
-												<form method=POST action="#">
-													<input type="hidden" value="modif boisson" name="action">
-													<input type="hidden" name="id_boisson" value="<?php echo $boisson["id"]; ?>">
-													<button type="submit"><i data-feather="edit"></i></button>
-												</form>
-											</td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-						<?php
-						}
-						?>
-						<tr>
-							<form method="POST" action="#">
-							<td>
-								<input type="hidden" value="ajout boisson" name="action">
-								<td>
-									<input type="text" name="nom_boisson" size="11">
-								</td>
-								<td>
-									<input type="text" name="description" size="11">
-								</td>
-								<td>
-									<input type="text" name="PU" size="11">
-								</td>
-								<td>
-									<SELECT name="type" size="1">
-										<option value="RON"><?php echo $produit['nom_produit']; ?></option>
-									</SELECT>
-								</td>
-									<button type="submit"><i data-feather="plus-square"></i></button>
-							</form>
-							</td>
-						</tr>
-					</table>
-				</div>
-			</div>
-		</div>
+					ici la liste des boisson et pour chaque boisson les produits "allergène" qu'elle contient
 
 				</div>
 			</div>
@@ -209,8 +99,151 @@ if ($_SESSION["role"] == "admin") {
 					<h5 class="card-title mb-0">Plats</h5>
 				</div>
 				<div class="card-body">
+				<table class="table">
 
-					ici la liste des plats et pourchaque plat la liste des produits qu'il contient
+					<!-- Nommage des titres des champs du tableau -->
+
+						<tr>
+							<th>nom du plat</th>
+							<th>description</th>
+							<th>type de plat</th>
+							<th>prix à la carte</th>
+							<th>produits associés</th>
+							<th>action</th>	
+						</tr>
+
+						<!-- Remplissage des champs du tableau -->
+
+						<?php
+						foreach ($plats  as $plat) {
+							
+
+							
+
+						?>
+							<tr>
+								<!-- Ajout des champs correspondant à la table plat de la BDD dans le tableau-->
+
+								<td><?php echo $plat ['nom_plat']; ?></td>
+								<td><?php echo $plat['description']; ?></td>
+								<td><?php echo $plat['type_plat']; ?></td>
+								<td><?php echo $plat['PU_carte']; ?></td>
+
+								<td>
+
+								<!--Creation de la liste déroulante qui contient les champs de la table produit  -->
+
+								<form action="" method="post">
+									<select name="id_produit" id="">
+										
+										<?php foreach ($produits as $produit){ ?>
+
+										<option value=<?= $produit['id_produit']?>>
+											<?php echo $produit['nom_produit'] ?>
+										</option>
+
+										<?php } ?>
+									</select>
+									
+									<button type="submit"><i data-feather="plus-square"></i></button>																
+								</form>
+
+								<!--Creation du tableau qui contient les produits associés aux plats -->
+								<?php while($contenu_plats = $statmt10->fetch()){?>
+
+									<?php $contenu_produit = [$contenu_plats["id_plat"] => $plat["nom_plat"]] ?>
+
+									<?php foreach($contenu_produit as $k => $v) ?>{
+										
+									<?php echo $k ?>
+									
+									}		
+									
+								<?php } ?>
+								
+								
+								<table>	
+									<tbody>		
+									<?php foreach($produits as $produit){ ?>
+										
+									
+										
+
+										<tr>
+											<td><?php echo $produit['nom_produit'] ?></td>
+										</tr>
+											
+										
+
+									
+									<?php } ?>
+									
+
+
+											
+								
+									</tbody>
+								</table>
+								</td>			
+
+                    			
+
+
+								<td>
+									<table>
+										<tr>
+											<td>
+												<form method=POST action="#">
+													<input type="hidden" value="suppr plat" name="action">
+													<input type="hidden" name="id_plat" value="<?php echo $plat["id_plat"]; ?>">
+													<button type="submit"><i data-feather="trash-2"></i></button>
+												</form>
+											</td>
+
+											<td>
+												<form method=POST action="#">
+													<input type="hidden" value="modif plat" name="action">
+													<input type="hidden" name="id_plat" value="<?php echo $plat["id_plat"]; ?>">
+													<button type="submit"><i data-feather="edit"></i></button>
+												</form>
+												
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						<?php
+							
+					}
+					
+
+						?>
+						<tr>
+							<form method="POST" action="#">
+								<input type="hidden" value="ajout plat" name="action">
+								<td>
+									<input type="text" name="nom_plat" size="11">
+								</td>
+
+								<td>
+									<input type="text" name="desc" size="11">
+								</td>
+
+								<td>
+									<input type="text" name="type_plat" size="11">
+								</td>
+
+								<td>
+									<input type="text" name="PU_carte" size="5" value="0.0">
+								</td>
+								
+								
+								<td>
+									<button type="submit"><i data-feather="plus-square"></i></button>
+							</form>
+								</td>
+						</tr>
+					</table>
 
 				</div>
 			</div>
@@ -235,7 +268,5 @@ if ($_SESSION["role"] == "admin") {
 <?php
 } else {
 	echo ("vous n'avez pas le droit d'être là");
-   
-
 }
 ?>
