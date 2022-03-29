@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `sgr_mono`
 --
-CREATE DATABASE IF NOT EXISTS `SGR_mono` DEFAULT CHARACTER SET utf8 COLLATE utf8_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `SGR_mono` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `SGR_mono`;
 
 -- --------------------------------------------------------
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
   `id_produit` int(11) NOT NULL AUTO_INCREMENT,
   `nom_produit` varchar(50) NOT NULL,
   PRIMARY KEY (`id_produit`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `produit`
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `boisson` (
   `description` text NOT NULL,
   `PU` float(11,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `boisson`
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `commander_boisson_indiv` (
   PRIMARY KEY (`id_commande`,`id_chaise`),
   KEY `commander_boisson_indiv_ibfk_1` (`id_chaise`),
   KEY `commander_boisson_indiv_ibfk_2` (`id_boisson`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -163,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `commander_boisson_table` (
   PRIMARY KEY (`id_commande`,`id_resa`),
   KEY `commander_boisson_table_ibfk_1` (`id_resa`),
   KEY `commander_boisson_table_ibfk_2` (`id_boisson`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -180,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `commander_menu` (
   PRIMARY KEY (`id_commande`,`id_chaise`),
   KEY `commander_menu_ibfk_1` (`id_chaise`),
   KEY `commander_menu_ibfk_2` (`id_menu`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `commander_menu`
@@ -202,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `commander_plat` (
   PRIMARY KEY (`id_commande`,`id_chaise`),
   KEY `commander_plat_ibfk_1` (`id_plat`),
   KEY `commander_plat_ibfk_2` (`id_chaise`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -215,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `contenir_boisson_produit` (
   `id_produit` int(11) NOT NULL,
   PRIMARY KEY (`id_boisson`,`id_produit`),
   KEY `contenir_boisson_produit_ibfk_2` (`id_produit`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `contenir_boisson_produit`
@@ -239,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `plat` (
   `type_plat` varchar(10) NOT NULL DEFAULT 'entplades',
   `PU_carte` float(11,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`id_plat`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `plat`
@@ -263,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `contenir_menu_plat` (
   `id_menu` int(11) NOT NULL,
   PRIMARY KEY (`id_plat`,`id_menu`),
   KEY `contenir_menu_plat_produit_ibfk_2` (`id_menu`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `contenir_menu_plat`
@@ -292,7 +292,7 @@ CREATE TABLE IF NOT EXISTS `contenir_plat_produit` (
   `id_produit` int(11) NOT NULL,
   PRIMARY KEY (`id_plat`,`id_produit`),
   KEY `contenir_platcarte_produit_ibfk_2` (`id_produit`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `contenir_plat_produit`
@@ -321,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `description` text,
   `date_menu` date DEFAULT NULL,
   PRIMARY KEY (`id_menu`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `menu`

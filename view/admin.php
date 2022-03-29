@@ -100,9 +100,6 @@ if ($_SESSION["role"] == "admin") {
 				</div>
 				<div class="card-body">
 				<table class="table">
-
-					<!-- Nommage des titres des champs du tableau -->
-
 						<tr>
 							<th>nom du plat</th>
 							<th>description</th>
@@ -111,19 +108,11 @@ if ($_SESSION["role"] == "admin") {
 							<th>produits associés</th>
 							<th>action</th>	
 						</tr>
-
-						<!-- Remplissage des champs du tableau -->
-
 						<?php
 						foreach ($plats  as $plat) {
-							
-
-							
 
 						?>
 							<tr>
-								<!-- Ajout des champs correspondant à la table plat de la BDD dans le tableau-->
-
 								<td><?php echo $plat ['nom_plat']; ?></td>
 								<td><?php echo $plat['description']; ?></td>
 								<td><?php echo $plat['type_plat']; ?></td>
@@ -131,64 +120,30 @@ if ($_SESSION["role"] == "admin") {
 
 								<td>
 
-								<!--Creation de la liste déroulante qui contient les champs de la table produit  -->
-
-								<form action="" method="post">
-									<select name="id_produit" id="">
+									<form action="" method="post">
+										<select name="id_produit" id="">
+											<?php foreach ($produits as $produit){ ?>
+												<option value=<?= $produit['id_produit']?>>
+													<?php echo $produit['nom_produit'] ?>
+												</option>
+											<?php } ?>
+										</select>
+										<button type="submit"><i data-feather="plus-square"></i></button>
+									</form>
 										
-										<?php foreach ($produits as $produit){ ?>
-
-										<option value=<?= $produit['id_produit']?>>
-											<?php echo $produit['nom_produit'] ?>
-										</option>
-
-										<?php } ?>
-									</select>
-									
-									<button type="submit"><i data-feather="plus-square"></i></button>																
-								</form>
-
-								<!--Creation du tableau qui contient les produits associés aux plats -->
-								<?php while($contenu_plats = $statmt10->fetch()){?>
-
-									<?php $contenu_produit = [$contenu_plats["id_plat"] => $plat["nom_plat"]] ?>
-
-									<?php foreach($contenu_produit as $k => $v) ?>{
-										
-									<?php echo $k ?>
-									
-									}		
-									
-								<?php } ?>
-								
-								
-								<table>	
-									<tbody>		
-									<?php foreach($produits as $produit){ ?>
-										
-									
-										
-
+									<table class="table">
 										<tr>
-											<td><?php echo $produit['nom_produit'] ?></td>
-										</tr>
-											
-										
+										</tr>	
+									<table>
+										<?php foreach ($prod_plats as $prod_plat) ?>
+												
+										<td><?php echo $prod_plat ['id_produit']; ?></td>
 
-									
-									<?php } ?>
-									
-
-
-											
-								
-									</tbody>
-								</table>
+									</table>
 								</td>			
 
+						
                     			
-
-
 								<td>
 									<table>
 										<tr>
@@ -197,6 +152,13 @@ if ($_SESSION["role"] == "admin") {
 													<input type="hidden" value="suppr plat" name="action">
 													<input type="hidden" name="id_plat" value="<?php echo $plat["id_plat"]; ?>">
 													<button type="submit"><i data-feather="trash-2"></i></button>
+														<script>
+														function confirmDelete(delUrl) {
+														if (confirm("Voulez vous vraiment supprimer ce plat?")) {
+														document.location = delUrl;
+														}
+														}
+														</script>
 												</form>
 											</td>
 
@@ -206,16 +168,13 @@ if ($_SESSION["role"] == "admin") {
 													<input type="hidden" name="id_plat" value="<?php echo $plat["id_plat"]; ?>">
 													<button type="submit"><i data-feather="edit"></i></button>
 												</form>
-												
 											</td>
 										</tr>
 									</table>
 								</td>
 							</tr>
-						<?php
-							
-					}
-					
+						<?php	
+						}
 
 						?>
 						<tr>
@@ -226,7 +185,7 @@ if ($_SESSION["role"] == "admin") {
 								</td>
 
 								<td>
-									<input type="text" name="desc" size="11">
+									<input type="text" name="description" size="11">
 								</td>
 
 								<td>
@@ -241,7 +200,7 @@ if ($_SESSION["role"] == "admin") {
 								<td>
 									<button type="submit"><i data-feather="plus-square"></i></button>
 							</form>
-								</td>
+							</td>
 						</tr>
 					</table>
 
