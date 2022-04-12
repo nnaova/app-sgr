@@ -30,7 +30,7 @@ if (isset($_SESSION["role"])) {
 								$id_t = $_POST["id_table"];
 								break;
 							}
-						case "ajout produit": {
+							case "ajout produit": {
 								$nom_p = $_POST["nom_produit"];
 								$statmt = $pdo->prepare('INSERT INTO `produit` (`id_produit`, `nom_produit`) VALUES (null,"' . $nom_p . '")');
 								$statmt->execute();
@@ -51,7 +51,7 @@ if (isset($_SESSION["role"])) {
 								$id_p = $_POST["id_produit"];
 								break;
 							}
-						case "ajout boisson": {
+							case "ajout boisson": {
 								$nom_b = $_POST["nom_boisson"];
 								$desc = $_POST["description"];
 								$pu = $_POST["PU"];
@@ -89,7 +89,7 @@ if (isset($_SESSION["role"])) {
 								$statmt->execute();
 								break;
 							}
-						case "ajout plat": {
+							case "ajout plat": {
 								$np = $_POST["nom_plat"];
 								$desc = $_POST["desc"];
 								$puc = $_POST["pu_carte"];
@@ -99,6 +99,15 @@ if (isset($_SESSION["role"])) {
 								$statmt->execute();
 								break;
 							}
+<<<<<<< Updated upstream
+=======
+						case "suppr plat": {
+							$idp = $_POST["id_plat"];
+							$statmt = $pdo->prepare('delete from plat where `id_plat`=' . $idp . ';');
+							$statmt->execute();
+							break;
+						}
+>>>>>>> Stashed changes
 						case "suppr prod boisson": {
 								$id_p = $_POST["id_produit"];
 								$id_b = $_POST["id_boisson"];
@@ -106,9 +115,9 @@ if (isset($_SESSION["role"])) {
 								$statmt->execute();
 								break;
 							}
-						case "ajout menu": {
+							case "ajouter menu": {
 								$nm = $_POST["nom_menu"];
-								$dm = $_POST["desc"];
+								$dm = $_POST["description"];
 								$Pm = $_POST["PU"];
 								$statmt = $pdo->prepare("INSERT INTO `menu` (`id_menu`, `nom_menu`, `PU`, `description`, `date_menu`) VALUES (NULL, '" . $nm . "', '" . $Pm . "', '" . $dm . "', NULL);");
 								$statmt->execute();
@@ -116,10 +125,26 @@ if (isset($_SESSION["role"])) {
 							}
 						case "suppr menu": {
 								$idm = $_POST["id_menu"];
+								$statmt = $pdo->prepare('delete from contenir_menu_plat where `id_menu`=' . $idm . ';');
+								$statmt->execute();
 								$statmt = $pdo->prepare('delete from menu where `id_menu`=' . $idm . ';');
 								$statmt->execute();
 								break;
 							}
+						case "suppr user": {
+								$idm = $_POST["id_user"];
+								$statmt = $pdo->prepare('delete from user where `id_user`=' . $idm . ';');
+								$statmt->execute();
+								break;
+							}
+						case "ajout user": {
+								$lg = $_POST["login"];
+								$rl = $_POST["role"];
+								$mdp = $_POST["mdp"];
+								$statmt = $pdo->prepare("INSERT INTO `user` (`id_user`, `login`,`role`, `mdp`) VALUES ('', '" . $lg . "', '" . $rl . "', '" . $mdp . "');");
+								$statmt->execute();
+								break;
+							}	
 						default: {
 								echo "erreur d'action: " . $_POST["action"];
 							}
@@ -160,6 +185,10 @@ if (isset($_SESSION["role"])) {
 				$statmt8 = $pdo->prepare('SELECT M.id_menu AS id_menu, M.nom_menu AS nom_menu,P.nom_plat AS nom_plat,P.type_plat AS type_plat FROM contenir_menu_plat CMP, menu M, plat P WHERE CMP.id_plat=P.id_plat AND M.id_menu=CMP.id_menu ORDER BY id_menu');
 				$statmt8->execute();
 				$menuplats = $statmt8->fetchAll(PDO::FETCH_ASSOC);
+				//recup de la liste des utilisateurs
+				$statmt8 = $pdo->prepare('SELECT * FROM user');
+				$statmt8->execute();
+				$users = $statmt8->fetchAll(PDO::FETCH_ASSOC);
 
 				include("view/admin.php");
 				include("include/enpied2.php");
